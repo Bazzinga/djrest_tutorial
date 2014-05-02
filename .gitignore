@@ -45,3 +45,4 @@ man
 .env
 .ropeproject/
 .venv
+*.sqlite3
