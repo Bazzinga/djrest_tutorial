@@ -4,7 +4,7 @@ from django.forms import widgets
 
 from rest_framework import serializers
 
-from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
+from snippets.models import Snippets, LANGUAGE_CHOICES, STYLE_CHOICES
 
 
 class SnippetSerializer(serializers.Serializer):
@@ -25,7 +25,7 @@ class SnippetSerializer(serializers.Serializer):
     language = serializers.ChoiceField(choices=LANGUAGE_CHOICES,
                                        default='python')
 
-    style = serializers.ChoiceField(choices=STYLE_CHOICES,
+    styles = serializers.ChoiceField(choices=STYLE_CHOICES,
                                     default='friendly')
 
     def restore_object(self, attrs, instance=None):
@@ -43,8 +43,8 @@ class SnippetSerializer(serializers.Serializer):
             instance.code = attrs.get('code', instance.code)
             instance.linenos = attrs.get('linenos', instance.linenos)
             instance.language = attrs.get('language', instance.language)
-            instance.style = attrs.get('style', instance.style)
+            instance.styles = attrs.get('styles', instance.style)
             return intance
 
         # Create new instance
-        return Snippet(**attrs)
+        return Snippets(**attrs)
